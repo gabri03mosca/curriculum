@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio personale di Gabriele Moscati - Ingegneria di Internet, networking, telecomunicazioni, IoT e sviluppo web." />
+  <title>Gabriele Moscati | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="noise"></div>
+  <div class="cursor-glow"></div>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="#home" class="brand">
+        <span class="brand-mark">GM</span>
+        <span>Gabriele Moscati</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links">
+        <a href="#about">Profilo</a>
+        <a href="#skills">Competenze</a>
+        <a href="#exams">Esami</a>
+        <a href="#projects">Progetti</a>
+        <a href="#contact">Contatti</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Portfolio GitHub / CV digitale</p>
+          <h1>
+            Neolaureato in
+            <span class="gradient-text">Ingegneria di Internet</span>
+          </h1>
+          <p class="hero-subtitle">
+            Studio e sviluppo soluzioni tra networking, telecomunicazioni, IoT,
+            programmazione e sistemi digitali.
+          </p>
+
+          <div class="typing-card">
+            <span class="terminal-dot"></span>
+            <span id="typing-text"></span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#projects">Vedi progetti</a>
+            <a class="btn secondary" href="#contact">Contattami</a>
+          </div>
+
+          <div class="quick-stats" aria-label="Statistiche rapide">
+            <div>
+              <strong>20+</strong>
+              <span>esami sostenuti</span>
+            </div>
+            <div>
+              <strong>IoT</strong>
+              <span>sensori e BLE</span>
+            </div>
+            <div>
+              <strong>Net</strong>
+              <span>reti e protocolli</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="orbit-card">
+            <div class="orbit"></div>
+            <div class="avatar-card">
+              <div class="avatar-placeholder">GM</div>
+              <h2>Gabriele Moscati</h2>
+              <p>Internet Engineering · Roma</p>
+            </div>
+
+            <div class="floating-chip chip-1">Python</div>
+            <div class="floating-chip chip-2">Networking</div>
+            <div class="floating-chip chip-3">HTML/CSS</div>
+            <div class="floating-chip chip-4">Telecom</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Profilo</p>
+        <h2>Chi sono</h2>
+      </div>
+
+      <div class="about-grid">
+        <article class="glass-card reveal">
+          <h3>Approccio</h3>
+          <p>
+            Sono una persona motivata, orientata alla crescita professionale e
+            con forte interesse per tecnologie di rete, sistemi digitali e sviluppo
+            software. Mi piace lavorare su problemi concreti, analizzare i dati,
+            progettare soluzioni e migliorare continuamente il risultato.
+          </p>
+        </article>
+
+        <article class="glass-card reveal">
+          <h3>Obiettivo professionale</h3>
+          <p>
+            Voglio crescere in ambiti legati a networking, IoT, telecomunicazioni,
+            cybersecurity di base, sviluppo web e analisi dei segnali, contribuendo
+            in team tecnici dove servono precisione, metodo e capacità di apprendere
+            rapidamente.
+          </p>
+        </article>
+
+        <article class="glass-card reveal">
+          <h3>Formazione</h3>
+          <ul class="timeline">
+            <li>
+              <span>2022 — 2026</span>
+              <strong>Laurea Triennale in Ingegneria di Internet</strong>
+              <p>Università degli Studi di Roma Tor Vergata</p>
+            </li>
+            <li>
+              <span>2017 — 2022</span>
+              <strong>Liceo Scientifico, Opzione Scienze Applicate</strong>
+              <p>Liceo Alessandro Volta</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Competenze</p>
+        <h2>Cosa so fare</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">🌐</div>
+          <h3>Networking</h3>
+          <p>Fondamenti di Internet, protocolli, reti locali, routing, controlli e gestione di sistemi di rete.</p>
+          <div class="skill-bar"><span style="width: 86%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">💻</div>
+          <h3>Programmazione</h3>
+          <p>C, Python, HTML, CSS, JavaScript, basi di sviluppo web e automazione di piccoli tool.</p>
+          <div class="skill-bar"><span style="width: 82%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">📡</div>
+          <h3>Telecomunicazioni</h3>
+          <p>Segnali, DSP, campi elettromagnetici, informazione, trasmissione e basi fisiche dei sistemi.</p>
+          <div class="skill-bar"><span style="width: 78%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🧠</div>
+          <h3>Metodo ingegneristico</h3>
+          <p>Analisi del problema, modellazione, verifica dei risultati, documentazione e lavoro in team.</p>
+          <div class="skill-bar"><span style="width: 90%"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exams" class="section container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Percorso universitario</p>
+        <h2>Esami sostenuti</h2>
+        <p class="section-note">
+          Una panoramica delle materie affrontate durante il percorso di Ingegneria.
+        </p>
+      </div>
+
+      <div class="exam-toolbar reveal">
+        <button class="filter-btn active" data-filter="all">Tutti</button>
+        <button class="filter-btn" data-filter="matematica">Matematica/Fisica</button>
+        <button class="filter-btn" data-filter="telecom">Telecom/Segnali</button>
+        <button class="filter-btn" data-filter="informatica">Informatica</button>
+        <button class="filter-btn" data-filter="ingegneria">Ingegneria</button>
+      </div>
+
+      <div class="exam-grid reveal" id="exam-grid">
+        <span class="exam-chip" data-category="matematica">Analisi 1</span>
+        <span class="exam-chip" data-category="matematica">Fisica 1</span>
+        <span class="exam-chip" data-category="telecom">DSP</span>
+        <span class="exam-chip" data-category="matematica">Analisi 2</span>
+        <span class="exam-chip" data-category="telecom">Campi</span>
+        <span class="exam-chip" data-category="ingegneria">Elettronica</span>
+        <span class="exam-chip" data-category="telecom">Fondamenti di Internet</span>
+        <span class="exam-chip" data-category="informatica">Informatica</span>
+        <span class="exam-chip" data-category="ingegneria">Controlli</span>
+        <span class="exam-chip" data-category="matematica">Geometria</span>
+        <span class="exam-chip" data-category="matematica">Probabilità</span>
+        <span class="exam-chip" data-category="informatica">Geoinformazione</span>
+        <span class="exam-chip" data-category="telecom">IoF</span>
+        <span class="exam-chip" data-category="informatica">ICT</span>
+        <span class="exam-chip" data-category="informatica">Programmazione Web</span>
+        <span class="exam-chip" data-category="informatica">Basi di Dati</span>
+        <span class="exam-chip" data-category="ingegneria">Elettrotecnica</span>
+        <span class="exam-chip" data-category="ingegneria">Economia</span>
+        <span class="exam-chip" data-category="ingegneria">Laboratorio</span>
+        <span class="exam-chip" data-category="matematica">Fisica 2</span>
+        <span class="exam-chip" data-category="telecom">Telecomunicazioni</span>
+      </div>
+    </section>
+
+    <section id="projects" class="section container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Portfolio</p>
+        <h2>Progetti da mettere in evidenza</h2>
+        <p class="section-note">
+          Puoi sostituire questi esempi con repository reali appena li pubblichi su GitHub.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card reveal">
+          <div class="project-top">
+            <span class="project-tag">Tesi / IoT</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>Monitoraggio cardiaco con sensori inerziali</h3>
+          <p>
+            Pipeline di acquisizione ed elaborazione di segnali IMU per stimare la frequenza cardiaca
+            tramite analisi spettrale, filtraggio e rilevamento dei picchi.
+          </p>
+          <div class="tech-list">
+            <span>MATLAB</span><span>DSP</span><span>IMU</span><span>BLE</span>
+          </div>
+          <a href="#" class="project-link">Aggiungi link GitHub →</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-top">
+            <span class="project-tag">Networking</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Laboratorio reti locali</h3>
+          <p>
+            Configurazione e gestione di una rete aziendale con servizi, routing, VLAN,
+            DHCP/DNS, firewall e analisi del traffico.
+          </p>
+          <div class="tech-list">
+            <span>Katharà</span><span>Linux</span><span>OSPF</span><span>VLAN</span>
+          </div>
+          <a href="#" class="project-link">Aggiungi link GitHub →</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-top">
+            <span class="project-tag">Web</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Web app responsive</h3>
+          <p>
+            Sito web mobile-first con layout responsive, interazione JavaScript,
+            modale dinamica e chiamate fetch verso server Node.js.
+          </p>
+          <div class="tech-list">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Node.js</span>
+          </div>
+          <a href="#" class="project-link">Aggiungi link GitHub →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="certificates" class="section container">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Certificati</p>
+        <h2>Formazione extra</h2>
+      </div>
+
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <span>2021</span>
+          <h3>Formazione Generale Sicurezza sul Lavoro</h3>
+          <p>Corso in materia di salute e sicurezza sul lavoro.</p>
+        </div>
+        <div class="cert-card reveal">
+          <span>2021</span>
+          <h3>ENI E-Learning</h3>
+          <p>Apprendimento delle dinamiche aziendali.</p>
+        </div>
+        <div class="cert-card reveal">
+          <span>2023</span>
+          <h3>Corso Avanzato Excel</h3>
+          <p>Uso avanzato di strumenti di produttività e analisi dati.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <div class="contact-panel reveal">
+        <div>
+          <p class="eyebrow">Contatti</p>
+          <h2>Costruiamo qualcosa insieme</h2>
+          <p>
+            Sono disponibile per opportunità junior, stage, collaborazioni e progetti
+            legati a networking, sviluppo web, IoT e telecomunicazioni.
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:Gabriele.moscati@gmail.com">Gabriele.moscati@gmail.com</a>
+          <a href="tel:+393668971114">+39 366 8971114</a>
+          <a href="https://github.com/tuo-username" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/tuo-profilo" target="_blank" rel="noreferrer">LinkedIn</a>
+          <span>Roma, Italia</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Gabriele Moscati — Portfolio personale</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
