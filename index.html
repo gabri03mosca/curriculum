@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Curriculum digitale di Gabriele Moscati - Ingegneria di Internet, networking, IoT, telecomunicazioni e sviluppo software." />
+  <title>Gabriele Moscati | Curriculum Digitale</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #060814;
+      --bg2: #0b1022;
+      --text: #f7f9ff;
+      --muted: #aeb8cf;
+      --muted2: #7c89a5;
+      --line: rgba(255, 255, 255, 0.14);
+      --glass: rgba(255, 255, 255, 0.075);
+      --glass2: rgba(255, 255, 255, 0.12);
+      --cyan: #4ddfff;
+      --violet: #8d7cff;
+      --green: #58f29a;
+      --shadow: 0 28px 100px rgba(0, 0, 0, 0.48);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(77, 223, 255, 0.16), transparent 28rem),
+        radial-gradient(circle at 88% 18%, rgba(141, 124, 255, 0.18), transparent 30rem),
+        radial-gradient(circle at 50% 100%, rgba(88, 242, 154, 0.12), transparent 34rem),
+        linear-gradient(135deg, #060814 0%, #091022 48%, #070918 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: radial-gradient(circle at center, black, transparent 82%);
+      z-index: -3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -4;
+      opacity: 0.85;
+    }
+
+    .orb {
+      position: fixed;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 999px;
+      filter: blur(80px);
+      opacity: 0.28;
+      z-index: -2;
+      animation: drift 10s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      top: 7rem;
+      left: -10rem;
+      background: var(--cyan);
+    }
+
+    .orb.two {
+      bottom: 3rem;
+      right: -10rem;
+      background: var(--violet);
+      animation-delay: 1.5s;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      background: rgba(6, 8, 20, 0.68);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 2rem));
+      height: 76px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      color: #061018;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      box-shadow: 0 0 34px rgba(77, 223, 255, 0.34);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.15rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--glass);
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 6px auto;
+      background: var(--text);
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 2rem));
+      margin: auto;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 9rem 0 5rem;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .kicker {
+      margin-bottom: 1rem;
+      color: var(--green);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin-bottom: 1.35rem;
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+    }
+
+    h1 span,
+    .gradient {
+      color: transparent;
+      background: linear-gradient(120deg, var(--cyan), var(--violet), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: clamp(2.05rem, 4.6vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+    }
+
+    h3 {
+      margin-bottom: 0.7rem;
+      font-size: 1.23rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.78;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn.primary {
+      color: #061018;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      box-shadow: 0 18px 44px rgba(77, 223, 255, 0.25);
+    }
+
+    .btn.secondary {
+      border: 1px solid var(--line);
+      background: var(--glass);
+    }
+
+    .hero-meta {
+      display: grid;
+      max-width: 760px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .meta-card,
+    .card,
+    .panel,
+    .expertise-card,
+    .work-card,
+    .contact-card,
+    .certificate-box {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--glass2), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .meta-card {
+      padding: 1rem;
+      border-radius: 20px;
+    }
+
+    .meta-card span {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--muted2);
+      font-size: 0.78rem;
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .status {
+      justify-self: end;
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.9rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--glass);
+      color: var(--muted);
+      font-weight: 700;
+      backdrop-filter: blur(18px);
+    }
+
+    .pulse {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(88,242,154,0.8);
+      animation: pulse 1.7s infinite;
+    }
+
+    .panel {
+      padding: 1.45rem;
+      border-radius: 32px;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted2);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .wave {
+      height: 170px;
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+      justify-content: center;
+      margin: 1.45rem 0;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at center, rgba(77,223,255,0.16), transparent 60%),
+        rgba(0,0,0,0.18);
+    }
+
+    .wave i {
+      width: 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--cyan), var(--violet));
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .wave i:nth-child(1) { height: 34px; animation-delay: .05s; }
+    .wave i:nth-child(2) { height: 72px; animation-delay: .10s; }
+    .wave i:nth-child(3) { height: 118px; animation-delay: .15s; }
+    .wave i:nth-child(4) { height: 62px; animation-delay: .20s; }
+    .wave i:nth-child(5) { height: 96px; animation-delay: .25s; }
+    .wave i:nth-child(6) { height: 136px; animation-delay: .30s; }
+    .wave i:nth-child(7) { height: 80px; animation-delay: .35s; }
+    .wave i:nth-child(8) { height: 112px; animation-delay: .40s; }
+    .wave i:nth-child(9) { height: 48px; animation-delay: .45s; }
+    .wave i:nth-child(10) { height: 88px; animation-delay: .50s; }
+
+    .stack {
+      display: grid;
+      gap: 0.78rem;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .stack li {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .stack span {
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 800;
+    }
+
+    .section {
+      padding: 6.4rem 0;
+    }
+
+    .section-title {
+      max-width: 850px;
+      margin-bottom: 2.3rem;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.28fr 0.86fr;
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1.45rem;
+      border-radius: 28px;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .card.big {
+      grid-row: span 2;
+      padding: 1.8rem;
+    }
+
+    .card:hover,
+    .expertise-card:hover,
+    .work-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(77, 223, 255, 0.42);
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .expertise-card {
+      position: relative;
+      min-height: 330px;
+      padding: 1.35rem;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .expertise-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -40% -30%;
+      height: 180px;
+      background: radial-gradient(circle, rgba(77,223,255,0.22), transparent 65%);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .expertise-card:hover::after {
+      opacity: 1;
+    }
+
+    .num {
+      display: inline-block;
+      margin-bottom: 3rem;
+      color: var(--cyan);
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 900;
+    }
+
+    .chips, .study-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.1rem;
+    }
+
+    .chips span,
+    .study-tags span {
+      padding: 0.48rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.11);
+      background: rgba(255,255,255,0.075);
+      color: #dceeff;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .education-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      padding: 1.3rem 1.3rem 1.3rem 1.5rem;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.065);
+      backdrop-filter: blur(16px);
+    }
+
+    .date {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      color: var(--green);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .study-card {
+      padding: 1.4rem;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--glass2), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .work-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .work-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      padding: 1.35rem;
+      border-radius: 28px;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .work-index {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #061018;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+    }
+
+    .certificate-box {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 28px;
+    }
+
+    .certificate-box div {
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .certificate-box strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .certificate-box span {
+      color: var(--muted);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2rem;
+      padding: 2rem;
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(77,223,255,0.13), rgba(141,124,255,0.10)),
+        rgba(255,255,255,0.07);
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .contact-actions a {
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.16);
+      font-weight: 800;
+      transition: transform .22s ease, border-color .22s ease;
+    }
+
+    .contact-actions a:hover {
+      transform: translateX(5px);
+      border-color: rgba(88,242,154,0.5);
+    }
+
+    footer {
+      width: min(1160px, calc(100% - 2rem));
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted2);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(.62); opacity: .72; }
+      50% { transform: scaleY(1.12); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 14px rgba(88,242,154,0); }
+      100% { box-shadow: 0 0 0 0 rgba(88,242,154,0); }
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(40px, -24px, 0) scale(1.12); }
+    }
+
+    @media (max-width: 1020px) {
+      .hero,
+      .profile-grid,
+      .education-layout,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .expertise-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .status {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        top: 84px;
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(6, 8, 20, 0.96);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding-top: 8rem;
+        gap: 2rem;
+      }
+
+      .hero-meta,
+      .expertise-grid,
+      .certificate-box {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="networkCanvas" aria-hidden="true"></canvas>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <header class="header">
+    <nav class="nav">
+      <a class="logo" href="#home">
+        <span class="logo-mark">GM</span>
+        <strong>Gabriele Moscati</strong>
+      </a>
+
+      <button class="menu-btn" aria-label="Apri menu">
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links">
+        <a href="#profile">Profilo</a>
+        <a href="#expertise">Competenze</a>
+        <a href="#education">Formazione</a>
+        <a href="#work">Portfolio</a>
+        <a href="#contact">Contatti</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="container hero">
+      <div class="hero-content reveal">
+        <p class="kicker">Engineering Portfolio</p>
+        <h1>Neolaureato in<br><span>Ingegneria di Internet</span></h1>
+
+        <p class="hero-text">
+          Profilo tecnico junior con basi solide in reti, telecomunicazioni,
+          programmazione, sistemi digitali e analisi dei dati. Interesse per
+          infrastrutture di rete, IoT, sviluppo software e soluzioni orientate
+          al mondo digitale.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact">Contattami</a>
+          <a class="btn secondary" href="#work">Vedi portfolio</a>
+        </div>
+
+        <div class="hero-meta">
+          <div class="meta-card">
+            <span>Area</span>
+            <strong>Networking · IoT · Web</strong>
+          </div>
+          <div class="meta-card">
+            <span>Base</span>
+            <strong>Roma, Italia</strong>
+          </div>
+          <div class="meta-card">
+            <span>Focus</span>
+            <strong>Sistemi digitali</strong>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side reveal">
+        <div class="status">
+          <i class="pulse"></i>
+          <span>Disponibile per opportunità junior / stage</span>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <span>TECH STACK</span>
+            <span>LIVE</span>
+          </div>
+
+          <div class="wave" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <ul class="stack">
+            <li><span>01</span> Python, C, HTML, CSS, JavaScript</li>
+            <li><span>02</span> Reti, protocolli, routing e servizi</li>
+            <li><span>03</span> Telecomunicazioni, segnali e DSP</li>
+            <li><span>04</span> Database, web e sistemi informativi</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section id="profile" class="container section">
+      <div class="section-title reveal">
+        <p class="kicker">Profilo</p>
+        <h2>Un profilo tecnico, non una lista di esami.</h2>
+      </div>
+
+      <div class="profile-grid">
+        <article class="card big reveal">
+          <h3>Chi sono</h3>
+          <p>
+            Ho completato un percorso in Ingegneria di Internet, costruendo una
+            preparazione trasversale tra informatica, telecomunicazioni, elettronica,
+            reti e modellazione matematica. Mi interessa lavorare su sistemi reali:
+            acquisire dati, interpretarli, progettare architetture affidabili e
+            trasformare un problema tecnico in una soluzione funzionante.
+          </p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Metodo</h3>
+          <p>
+            Ragiono per blocchi: analisi del requisito, scelta dell'architettura,
+            implementazione, test e miglioramento. Questo approccio mi permette di
+            affrontare sia codice sia infrastrutture di rete con ordine e precisione.
+          </p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Obiettivo</h3>
+          <p>
+            Crescere in un team tecnico dove poter applicare competenze di networking,
+            sviluppo software, IoT e analisi dati, contribuendo a progetti concreti e
+            misurabili.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="expertise" class="container section">
+      <div class="section-title reveal">
+        <p class="kicker">Competenze</p>
+        <h2>Aree tecniche principali</h2>
+      </div>
+
+      <div class="expertise-grid">
+        <article class="expertise-card reveal">
+          <span class="num">01</span>
+          <h3>Network & Internet Engineering</h3>
+          <p>Fondamenti di Internet, architetture di rete, protocolli, servizi, configurazione di ambienti di rete e troubleshooting di base.</p>
+          <div class="chips"><span>TCP/IP</span><span>Routing</span><span>DNS/DHCP</span><span>Linux</span></div>
+        </article>
+
+        <article class="expertise-card reveal">
+          <span class="num">02</span>
+          <h3>Software & Web</h3>
+          <p>Programmazione procedurale, scripting, sviluppo web responsive, interfacce e basi di interazione client/server.</p>
+          <div class="chips"><span>C</span><span>Python</span><span>HTML/CSS</span><span>JavaScript</span></div>
+        </article>
+
+        <article class="expertise-card reveal">
+          <span class="num">03</span>
+          <h3>Telecomunicazioni & Segnali</h3>
+          <p>Basi di trasmissione, segnali, DSP, campionamento, analisi in frequenza e dati provenienti da sensori.</p>
+          <div class="chips"><span>DSP</span><span>Segnali</span><span>MATLAB</span><span>IoT</span></div>
+        </article>
+
+        <article class="expertise-card reveal">
+          <span class="num">04</span>
+          <h3>Dati & Sistemi</h3>
+          <p>Modellazione dei dati, basi di dati, strumenti Office/Workspace, organizzazione documentale e reporting tecnico.</p>
+          <div class="chips"><span>SQL</span><span>Database</span><span>Excel</span><span>Report</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education" class="container section">
+      <div class="section-title reveal">
+        <p class="kicker">Formazione</p>
+        <h2>Percorso accademico</h2>
+      </div>
+
+      <div class="education-layout">
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <span class="date">2022 — 2026</span>
+            <h3>Laurea Triennale in Ingegneria di Internet</h3>
+            <p>Università degli Studi di Roma Tor Vergata</p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="date">2017 — 2022</span>
+            <h3>Liceo Scientifico - Opzione Scienze Applicate</h3>
+            <p>Formazione scientifica con basi di matematica, fisica e informatica.</p>
+          </div>
+        </div>
+
+        <div class="study-card reveal">
+          <h3>Aree studiate</h3>
+          <p>
+            Il percorso viene sintetizzato per aree di competenza, evitando un elenco
+            troppo scolastico dei singoli esami.
+          </p>
+
+          <div class="study-tags">
+            <span>Matematica e fisica</span>
+            <span>Probabilità e geometria</span>
+            <span>Elettronica ed elettrotecnica</span>
+            <span>Controlli</span>
+            <span>Telecomunicazioni</span>
+            <span>DSP e segnali</span>
+            <span>Campi elettromagnetici</span>
+            <span>Informatica</span>
+            <span>Programmazione web</span>
+            <span>Basi di dati</span>
+            <span>ICT</span>
+            <span>Economia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="container section">
+      <div class="section-title reveal">
+        <p class="kicker">Portfolio</p>
+        <h2>Progetti e attività tecniche</h2>
+      </div>
+
+      <div class="work-list">
+        <article class="work-card reveal">
+          <div class="work-index">01</div>
+          <div>
+            <h3>Sistema IoT per acquisizione ed elaborazione di segnali da sensori</h3>
+            <p>
+              Progetto orientato all'acquisizione di dati da sensori inerziali e alla
+              successiva elaborazione tramite filtraggio, analisi spettrale e stima di
+              parametri fisiologici.
+            </p>
+            <div class="chips"><span>IoT</span><span>BLE</span><span>IMU</span><span>MATLAB</span><span>Signal Processing</span></div>
+          </div>
+        </article>
+
+        <article class="work-card reveal">
+          <div class="work-index">02</div>
+          <div>
+            <h3>Configurazione e gestione di reti locali</h3>
+            <p>
+              Attività di laboratorio su infrastrutture di rete, servizi, routing,
+              segmentazione, sicurezza di base e configurazione di host in ambiente
+              simulato o virtualizzato.
+            </p>
+            <div class="chips"><span>Networking</span><span>Linux</span><span>VLAN</span><span>Routing</span><span>Firewall</span></div>
+          </div>
+        </article>
+
+        <article class="work-card reveal">
+          <div class="work-index">03</div>
+          <div>
+            <h3>Sviluppo web e interfacce responsive</h3>
+            <p>
+              Realizzazione di pagine web e componenti interattivi con attenzione a
+              layout responsive, usabilità, struttura del codice e separazione tra
+              contenuto, stile e logica.
+            </p>
+            <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive Design</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="section-title reveal">
+        <p class="kicker">Certificazioni</p>
+        <h2>Formazione complementare</h2>
+      </div>
+
+      <div class="certificate-box reveal">
+        <div><strong>Corso Avanzato Excel</strong><span>Analisi dati e produttività</span></div>
+        <div><strong>Formazione Generale Sicurezza sul Lavoro</strong><span>Salute e sicurezza</span></div>
+        <div><strong>ENI E-Learning</strong><span>Dinamiche aziendali</span></div>
+      </div>
+    </section>
+
+    <section id="contact" class="container section">
+      <div class="contact-card reveal">
+        <div>
+          <p class="kicker">Contatti</p>
+          <h2>Parliamone.</h2>
+          <p>
+            Per opportunità junior, stage, collaborazioni o progetti tecnici,
+            puoi contattarmi tramite email, telefono o profili professionali.
+          </p>
+        </div>
+
+        <div class="contact-actions">
+          <a href="mailto:Gabriele.moscati@gmail.com">Gabriele.moscati@gmail.com</a>
+          <a href="tel:+393668971114">+39 366 8971114</a>
+          <a href="https://github.com/gabri03mosca" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/inserisci-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Gabriele Moscati</span>
+    <span>Curriculum digitale / Engineering Portfolio</span>
+  </footer>
+
+  <script>
+    document.querySelector("#year").textContent = new Date().getFullYear();
+
+    const menuBtn = document.querySelector(".menu-btn");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    const canvas = document.getElementById("networkCanvas");
+    const ctx = canvas.getContext("2d");
+    let w, h, particles = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      const count = Math.min(95, Math.floor((w * h) / 17000));
+
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.34,
+        vy: (Math.random() - 0.5) * 0.34,
+        r: Math.random() * 1.8 + 0.7
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(77, 223, 255, 0.55)";
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+
+          if (d < 135) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(141, 124, 255, ${0.14 * (1 - d / 135)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+  </script>
+</body>
+</html>
